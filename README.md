@@ -65,6 +65,23 @@ Result:
 - Chrome can be installed and launched
 - Android UI can be controlled from Windows using scrcpy
 
+## 📸 Screenshots
+
+### ReDroid Home
+![ReDroid Home](docs/images/safe/01-redroid-home.png)
+
+### Play Store
+![Play Store](docs/images/safe/02-playstore.png)
+
+### Chrome Installed
+![Chrome Installed](docs/images/safe/03-chrome-installed.png)
+
+### Chrome Browser
+![Chrome Browser](docs/images/safe/04-chrome-browser.png)
+
+### scrcpy UI
+![scrcpy](docs/images/safe/05-scrcpy-ui.png)
+
 ---
 
 ## 🧠 Architecture Overview
