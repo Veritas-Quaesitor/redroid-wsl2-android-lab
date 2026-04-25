@@ -2,20 +2,20 @@
 
 ## 📚 Table of Contents
 
-- [Purpose](#-purpose)
-- [Problem Statement](#-problem-statement)
-- [Final Working Solution](#-final-working-solution)
-- [Architecture Overview](#-architecture-overview)
-- [Key Requirements](#-key-requirements)
-- [What This Repo Contains](#-what-this-repo-contains)
-- [Supported Modes](#-supported-modes)
-- [Quick Start](#-quick-start)
-- [Security Notice](#-security-notice)
-- [Known Limitations](#-known-limitations)
+- [Purpose](#purpose)
+- [Problem Statement](#problem-statement)
+- [Final Working Solution](#final-working-solution)
+- [Architecture Overview](#architecture-overview)
+- [Key Requirements](#key-requirements)
+- [What This Repo Contains](#what-this-repo-contains)
+- [Supported Modes](#supported-modes)
+- [Quick Start](#quick-start)
+- [Security Notice](#security-notice)
+- [Known Limitations](#known-limitations)
 
 ---
 
-## 🎯 Purpose
+## Purpose
 
 Provide a reproducible local development setup to run a usable **Android environment in Docker on Windows 11 + WSL2** using ReDroid.
 
@@ -30,7 +30,7 @@ This setup avoids:
 
 ---
 
-## ❗ Problem Statement
+## Problem Statement
 
 Developers often need a repeatable Android environment for browser testing, app validation, automation, or integration testing, but common approaches have drawbacks.
 
@@ -45,7 +45,7 @@ This repo documents a working ReDroid-based approach for Windows + WSL2.
 
 ---
 
-## ✅ Final Working Solution
+## Final Working Solution
 
 This lab provides a working setup using:
 
@@ -65,7 +65,7 @@ Result:
 - Chrome can be installed and launched
 - Android UI can be controlled from Windows using scrcpy
 
-## 📸 Screenshots
+## Screenshots
 
 ### ReDroid Home
 ![ReDroid Home](docs/images/safe/01-redroid-home.png)
@@ -84,7 +84,7 @@ Result:
 
 ---
 
-## 🧠 Architecture Overview
+## Architecture Overview
 
 ```text
 Windows 11
@@ -103,7 +103,7 @@ Windows 11
 
 ---
 
-## ⚠️ Key Requirements
+## Key Requirements
 
 This setup depends on:
 
@@ -120,7 +120,7 @@ Python and pip are **not required** for the final working path.
 
 ---
 
-## 📦 What This Repo Contains
+## What This Repo Contains
 
 - Preconfigured **ReDroid Docker Compose stack**
 - Working WSL2 kernel config
@@ -142,7 +142,7 @@ Python and pip are **not required** for the final working path.
 
 ---
 
-## 🚀 Supported Modes
+## Supported Modes
 
 | Mode | Description |
 |---|---|
@@ -153,7 +153,7 @@ Both modes require the same custom WSL2 kernel.
 
 ---
 
-## ⚡ Quick Start
+## Quick Start
 
 Choose your setup path:
 
@@ -162,7 +162,7 @@ Choose your setup path:
 
 ---
 
-### 🔧 Step 1 — Apply Custom WSL2 Kernel
+### Step 1 — Apply Custom WSL2 Kernel
 
 Copy the prebuilt kernel to:
 
@@ -191,7 +191,7 @@ wsl --shutdown
 
 ---
 
-### 🔧 Step 2 — Verify Kernel + Binder
+### Step 2 — Verify Kernel + Binder
 
 Inside WSL:
 
@@ -224,7 +224,7 @@ vndbinder
 
 ---
 
-### 🔧 Step 3 — Docker Setup
+### Step 3 — Docker Setup
 
 #### Mode A: WSL-native Docker + Dockhand
 
@@ -244,7 +244,7 @@ sudo systemctl restart docker
 
 ---
 
-### 🔧 Step 4 — Start ReDroid
+### Step 4 — Start ReDroid
 
 From WSL, inside the repo root:
 
@@ -254,7 +254,7 @@ docker compose -f compose/redroid-gapps.compose.yaml up -d
 
 ---
 
-### 🔧 Step 5 — Connect ADB from Windows
+### Step 5 — Connect ADB from Windows
 
 ```powershell
 .\scripts\adb-connect.ps1
@@ -271,7 +271,7 @@ adb devices -l
 
 ---
 
-### 🔧 Step 6 — Launch Android UI
+### Step 6 — Launch Android UI
 
 ```powershell
 .\scripts\start-scrcpy.ps1
@@ -285,7 +285,7 @@ scrcpy -s 127.0.0.1:5555 --no-audio
 
 ---
 
-### 🔧 Step 7 — Setup Android
+### Step 7 — Setup Android
 
 Inside Android:
 
@@ -296,7 +296,7 @@ Inside Android:
 
 ---
 
-## ✅ Expected Result
+## Expected Result
 
 - Android device is usable through scrcpy
 - Play Store works
@@ -306,7 +306,7 @@ Inside Android:
 
 ---
 
-## ⚠️ Security Notice
+## Security Notice
 
 This repo intentionally excludes:
 
@@ -322,7 +322,7 @@ Use only test accounts and non-production systems when validating the environmen
 
 ---
 
-## ⚠️ Known Limitations
+## Known Limitations
 
 - scrcpy audio is disabled (`--no-audio`) due to missing OPUS encoder in ReDroid
 - Performance is dependent on WSL2 and host machine resources
