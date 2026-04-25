@@ -1,0 +1,25 @@
+# GApps-enabled ReDroid image (Play Store + Google Services included)
+# Required for Google Pay Web testing in Chrome
+services:
+  redroid:
+    image: fahaddz/redroid:13
+    container_name: redroid
+    privileged: true
+    restart: unless-stopped
+
+    ports:
+      - "127.0.0.1:5555:5555"
+
+    volumes:
+      - redroid-data:/data
+      - /dev/binderfs:/dev/binderfs
+
+    shm_size: "2g"
+
+    command:
+      - androidboot.redroid_width=1080
+      - androidboot.redroid_height=1920
+      - androidboot.redroid_dpi=420
+
+volumes:
+  redroid-data:

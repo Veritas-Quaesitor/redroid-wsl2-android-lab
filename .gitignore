@@ -1,0 +1,47 @@
+# OS/editor noise
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Logs / temp
+*.log
+*.tmp
+*.bak
+
+# Secrets / local config
+.env
+.env.*
+*.key
+*.pem
+*.pfx
+*.p12
+*.crt
+
+# Payment/testing sensitive artifacts
+payloads/
+tokens/
+screenshots/
+recordings/
+captures/
+
+# Large generated kernel/build artifacts
+kernel/build/
+kernel/source/
+*.o
+*.ko
+*.mod
+*.mod.c
+*.cmd
+Module.symvers
+System.map
+vmlinux
+bzImage*
+
+# Keep bin folder but do not commit binaries by default
+bin/*
+!bin/.gitkeep
+
+# Docker/compose local overrides
+compose/*.override.yaml
+compose/*.local.yaml
