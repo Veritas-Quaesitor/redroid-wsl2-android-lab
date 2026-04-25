@@ -1,5 +1,17 @@
 # redroid-wsl2-gpay-lab
 
+## 📚 Table of Contents
+
+- [Purpose](#-purpose)
+- [Problem Statement](#-problem-statement)
+- [Final Working Solution](#-final-working-solution)
+- [Architecture Overview](#-architecture-overview)
+- [Key Requirements](#-key-requirements)
+- [What This Repo Contains](#-what-this-repo-contains)
+- [Supported Modes](#-supported-modes)
+- [Quick Start](#-quick-start)
+- [Security Notice](#-security-notice)
+
 ## 🎯 Purpose
 
 Provide a reproducible local development setup to test **Google Pay Web flows inside Android Chrome** without:
