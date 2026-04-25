@@ -294,3 +294,17 @@ Inside Android:
 - Chrome installed
 - Google account signed in
 - Google Pay Web TEST flow completes successfully
+
+---
+
+---
+
+## ⚠️ Known Limitations
+
+- scrcpy audio is disabled (`--no-audio`) due to missing OPUS encoder in ReDroid
+- Performance is dependent on WSL2 and host machine resources
+- Docker Desktop mode may behave differently than native WSL Docker
+- BinderFS must be mounted manually after WSL restart
+- Not suitable for production or real payment processing
+
+---
