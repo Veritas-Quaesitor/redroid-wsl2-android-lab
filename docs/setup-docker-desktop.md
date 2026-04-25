@@ -107,7 +107,7 @@ ls /dev/binderfs
 From WSL:
 
 ```bash
-cd /mnt/c/Users/<your-user>/source/redroid-wsl2-gpay-lab
+cd /mnt/c/path/to/redroid-wsl2-android-lab
 docker compose -f compose/redroid-gapps.compose.yaml up -d
 ```
 

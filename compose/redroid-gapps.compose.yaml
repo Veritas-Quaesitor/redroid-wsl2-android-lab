@@ -1,5 +1,5 @@
 # GApps-enabled ReDroid image (Play Store + Google Services included)
-# Required for Google Pay Web testing in Chrome
+# Provides Play Store / Google Services for installing Chrome and other apps
 services:
   redroid:
     image: fahaddz/redroid:13

@@ -2,9 +2,21 @@
 
 ## Overview
 
-This runbook covers the **daily usage workflow** for the ReDroid lab.
+This runbook covers the daily usage workflow for the ReDroid Android lab.
 
 Use this after the initial setup is complete.
+
+---
+
+## Assumption
+
+Commands in this document assume you are running them from the repository root unless stated otherwise.
+
+From WSL, navigate to wherever you cloned the repo, for example:
+
+```bash
+cd /mnt/c/path/to/redroid-wsl2-android-lab
+```
 
 ---
 
@@ -32,7 +44,7 @@ scripts/mount-binderfs.sh
 docker ps
 ```
 
-If not:
+If Docker is not running in Mode A:
 
 ```bash
 scripts/configure-iptables-legacy.sh
@@ -43,42 +55,46 @@ scripts/configure-iptables-legacy.sh
 ### 4. Start ReDroid
 
 ```bash
-cd /mnt/c/Users/<your-user>/source/redroid-wsl2-gpay-lab
 docker compose -f compose/redroid-gapps.compose.yaml up -d
 ```
 
 ---
 
-## 🔌 Connect Device (Windows)
+## 🔌 Connect Device from Windows
+
+From Windows PowerShell, inside the repository root:
 
 ```powershell
-scripts\adb-connect.ps1
+.\scripts\adb-connect.ps1
 ```
 
 ---
 
 ## 🖥️ Open Android UI
 
+From Windows PowerShell, inside the repository root:
+
 ```powershell
-scripts\start-scrcpy.ps1
+.\scripts\start-scrcpy.ps1
 ```
 
 ---
 
-## 🧪 Run Google Pay Test
+## 🧪 Run Browser/App Test
 
 Inside Android:
 
-1. Open Chrome
-2. Navigate to test merchant page
-3. Trigger Google Pay
-4. Complete payment
+1. Open Play Store
+2. Install Chrome or another target Android app
+3. Open Chrome or the target app
+4. Navigate to a test web page or test environment
+5. Validate input, rendering, network access, and required behavior
 
 ---
 
 ## 🛑 Stop Environment
 
-From WSL:
+From WSL, inside the repository root:
 
 ```bash
 docker compose -f compose/redroid-gapps.compose.yaml down
@@ -89,27 +105,27 @@ docker compose -f compose/redroid-gapps.compose.yaml down
 ## 🔄 Restart Flow
 
 ```text
-1. mount-binderfs
-2. ensure Docker running
-3. start ReDroid
-4. connect ADB
-5. start scrcpy
+1. Mount binderfs
+2. Ensure Docker is running
+3. Start ReDroid
+4. Connect ADB
+5. Start scrcpy
 ```
 
 ---
 
 ## 🔍 Health Check
 
-Run:
+From WSL:
 
 ```bash
 scripts/verify-host.sh
 ```
 
-Then from Windows:
+From Windows PowerShell:
 
 ```powershell
-scripts\verify-redroid.ps1
+.\scripts\verify-redroid.ps1
 ```
 
 ---
@@ -136,7 +152,7 @@ adb connect 127.0.0.1:5555
 ### scrcpy fails
 
 ```powershell
-scripts\start-scrcpy.ps1
+.\scripts\start-scrcpy.ps1
 ```
 
 or fallback:
@@ -149,6 +165,6 @@ scrcpy -s 127.0.0.1:5555 --no-audio --max-size=1024
 
 ## 🧠 Notes
 
-- Always mount binderfs after WSL restart
+- Always mount binderfs after WSL restarts
 - Always verify Docker before starting ReDroid
 - Use `--no-audio` with scrcpy to avoid encoder issues

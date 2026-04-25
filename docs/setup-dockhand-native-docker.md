@@ -27,7 +27,7 @@ C:\wsl-kernel\bzImage-redroid-docker-v2
 - Repo checked out at:
 
 ```text
-%USERPROFILE%\source\redroid-wsl2-gpay-lab
+<repo-root>
 ```
 
 ## 1. Configure WSL to use the custom kernel
@@ -189,8 +189,8 @@ Inside the Android UI:
 2. Sign into a Google account.
 3. Install Chrome.
 4. Open Chrome.
-5. Navigate to the Google Pay Web test page.
-6. Complete the payment flow.
+5. Navigate to a public or internal test page.
+6. Validate the required browser or app behavior.
 
 ## Known required fixes
 

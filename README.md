@@ -1,4 +1,4 @@
-# redroid-wsl2-gpay-lab
+# redroid-wsl2-android-lab
 
 ## 📚 Table of Contents
 
@@ -11,33 +11,37 @@
 - [Supported Modes](#-supported-modes)
 - [Quick Start](#-quick-start)
 - [Security Notice](#-security-notice)
+- [Known Limitations](#-known-limitations)
+
+---
 
 ## 🎯 Purpose
 
-Provide a reproducible local development setup to test **Google Pay Web flows inside Android Chrome** without:
+Provide a reproducible local development setup to run a usable **Android environment in Docker on Windows 11 + WSL2** using ReDroid.
 
-- Physical Android devices (USB restricted environments)
-- Android Studio (heavyweight tooling)
-- Cloud-based emulators (compliance / security concerns)
+The goal is to give developers an Android container that can be controlled interactively through ADB and scrcpy, with Google Play Services available so Chrome and other Play Store apps can be installed and tested.
+
+This setup avoids:
+
+- Physical Android devices
+- Android Studio
+- Cloud-based Android devices
+- VNC-heavy Android-in-Docker images
 
 ---
 
 ## ❗ Problem Statement
 
-In high-compliance environments (e.g. PSP / PCI DSS), developers often cannot:
-
-- Plug in physical Android devices (USB restrictions)
-- Use personal mobile devices
-- Reliably test Google Pay Web flows from desktop browsers
-
-Standard alternatives have limitations:
+Developers often need a repeatable Android environment for browser testing, app validation, automation, or integration testing, but common approaches have drawbacks.
 
 | Approach | Issue |
 |---|---|
-| Android Studio Emulator | Heavy, complex, unstable for this use case |
-| docker-android (budtmo) | Unstable ADB/VNC issues |
-| Google emulator containers | Poor stability in WSL |
-| Base ReDroid | No Google Play, Chrome, or GMS |
+| Android Studio Emulator | Heavyweight and often overkill for simple browser/app testing |
+| docker-android / VNC-based images | Can be unstable, especially around ADB, VNC, and input |
+| Google emulator containers | Can be difficult to stabilize inside WSL2 |
+| Base ReDroid image | Boots Android, but does not include Google Play, Chrome, or GMS |
+
+This repo documents a working ReDroid-based approach for Windows + WSL2.
 
 ---
 
@@ -47,19 +51,19 @@ This lab provides a working setup using:
 
 - **Windows 11 + WSL2 Ubuntu**
 - **Custom WSL2 kernel** with BinderFS and Docker networking support
-- **Docker**, either WSL-native with Dockhand or Docker Desktop
+- **Docker**, either WSL-native with Dockhand or Docker Desktop integration
 - **ReDroid Android 13 with GApps**
 - **ADB over TCP**
 - **scrcpy for UI control**
-- **Chrome installed via Play Store**
+- **Chrome installed through Play Store**
 
 Result:
 
-- Full Android environment
-- Google account sign-in
-- Play Store access
-- Chrome browser
-- Google Pay Web TEST payment flow successfully completed
+- Android 13 container boots successfully
+- Google account sign-in works
+- Play Store works
+- Chrome can be installed and launched
+- Android UI can be controlled from Windows using scrcpy
 
 ---
 
@@ -95,6 +99,8 @@ This setup depends on:
 
 Without these, the setup will fail.
 
+Python and pip are **not required** for the final working path.
+
 ---
 
 ## 📦 What This Repo Contains
@@ -113,7 +119,7 @@ Without these, the setup will fail.
   - Dockhand users
   - Docker Desktop users
   - Kernel requirements
-  - Google Pay Web testing
+  - Android Chrome/browser testing
   - Rollback
   - Troubleshooting known failures
 
@@ -130,27 +136,11 @@ Both modes require the same custom WSL2 kernel.
 
 ---
 
-## ⚠️ Security Notice
-
-This repo intentionally excludes:
-
-- Payment payloads
-- Tokens
-- Credentials
-- Certificates
-- Real merchant data
-- Screenshots containing sensitive information
-- Production PSP endpoints
-
-Use only **test environments, test accounts, and non-production credentials**.
-
----
-
 ## ⚡ Quick Start
 
 Choose your setup path:
 
-- **Mode A** → WSL2 + native Docker Engine + Dockhand *(recommended / proven)*
+- **Mode A** → WSL2 + native Docker Engine + Dockhand *(primary validated setup)*
 - **Mode B** → WSL2 + Docker Desktop integration
 
 ---
@@ -219,7 +209,7 @@ vndbinder
 
 ### 🔧 Step 3 — Docker Setup
 
-#### Mode A (WSL-native Docker + Dockhand)
+#### Mode A: WSL-native Docker + Dockhand
 
 ```bash
 sudo update-alternatives --set iptables /usr/sbin/iptables-legacy
@@ -229,9 +219,7 @@ sudo systemctl restart containerd
 sudo systemctl restart docker
 ```
 
----
-
-#### Mode B (Docker Desktop)
+#### Mode B: Docker Desktop
 
 - Enable WSL2 backend
 - Enable Ubuntu distro integration
@@ -241,16 +229,21 @@ sudo systemctl restart docker
 
 ### 🔧 Step 4 — Start ReDroid
 
-From WSL:
+From WSL, inside the repo root:
 
 ```bash
-cd /mnt/c/Users/<your-user>/source/redroid-wsl2-gpay-lab
 docker compose -f compose/redroid-gapps.compose.yaml up -d
 ```
 
 ---
 
-### 🔧 Step 5 — Connect ADB (Windows)
+### 🔧 Step 5 — Connect ADB from Windows
+
+```powershell
+.\scripts\adb-connect.ps1
+```
+
+Or manually:
 
 ```powershell
 adb kill-server
@@ -264,38 +257,51 @@ adb devices -l
 ### 🔧 Step 6 — Launch Android UI
 
 ```powershell
+.\scripts\start-scrcpy.ps1
+```
+
+Or manually:
+
+```powershell
 scrcpy -s 127.0.0.1:5555 --no-audio
 ```
 
 ---
 
-### 🔧 Step 7 — Setup Device
+### 🔧 Step 7 — Setup Android
 
 Inside Android:
 
 - Sign into Google account
 - Open Play Store
 - Install Chrome
-
----
-
-### 🔧 Step 8 — Test Google Pay Web
-
-- Open Chrome
-- Navigate to test merchant page
-- Complete Google Pay Web flow
+- Launch Chrome or another target Android app
 
 ---
 
 ## ✅ Expected Result
 
-- Android device fully usable
-- Play Store working
-- Chrome installed
-- Google account signed in
-- Google Pay Web TEST flow completes successfully
+- Android device is usable through scrcpy
+- Play Store works
+- Chrome can be installed
+- Google account sign-in works
+- ADB connects over `127.0.0.1:5555`
 
 ---
+
+## ⚠️ Security Notice
+
+This repo intentionally excludes:
+
+- Credentials
+- Certificates
+- API keys
+- Real account data
+- Sensitive screenshots
+- Internal endpoints
+- Production application data
+
+Use only test accounts and non-production systems when validating the environment.
 
 ---
 
@@ -304,7 +310,7 @@ Inside Android:
 - scrcpy audio is disabled (`--no-audio`) due to missing OPUS encoder in ReDroid
 - Performance is dependent on WSL2 and host machine resources
 - Docker Desktop mode may behave differently than native WSL Docker
-- BinderFS must be mounted manually after WSL restart
-- Not suitable for production or real payment processing
+- BinderFS must be mounted after WSL restarts
+- This repo provides a development/test Android environment, not a certified production Android device
 
 ---

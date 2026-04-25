@@ -40,7 +40,7 @@ You should now see the default Microsoft WSL kernel.
 ## 🐳 Stop and Remove ReDroid
 
 ```bash
-cd /mnt/c/Users/<your-user>/source/redroid-wsl2-gpay-lab
+cd /mnt/c/path/to/redroid-wsl2-android-lab
 
 docker compose -f compose/redroid-gapps.compose.yaml down
 docker rm -f redroid 2>/dev/null || true

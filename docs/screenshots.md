@@ -2,20 +2,20 @@
 
 ## Purpose
 
-Screenshots improve usability and adoption, but must be **sanitized** for compliance.
+Screenshots improve usability and adoption, but they must be sanitized before committing.
 
 ---
 
 ## ⚠️ Do NOT include
 
-- Real payment data
-- Tokens / payloads
-- Merchant IDs
+- Credentials
+- API keys
+- Tokens
 - Certificates
-- Email addresses (unless test-only)
-- PSP endpoints
-- Internal URLs
-- Browser dev tools showing sensitive data
+- Email addresses unless they are clearly test-only
+- Internal URLs or hostnames
+- Private application data
+- Browser dev tools showing sensitive values
 
 ---
 
@@ -24,9 +24,9 @@ Screenshots improve usability and adoption, but must be **sanitized** for compli
 - ReDroid home screen
 - Play Store (logged into test account)
 - Chrome installed
-- Google Pay button (before payment)
+- Chrome loading a public website
 - scrcpy window
-- Dockhand UI (without sensitive stacks)
+- Dockhand UI with sensitive stack names hidden
 - Terminal output with no secrets
 
 ---
@@ -45,9 +45,9 @@ docs/images/placeholders/
 1. ReDroid boot screen
 2. Play Store logged in
 3. Chrome installed
-4. Google Pay button visible
+4. Chrome loading a public page
 5. scrcpy running
-6. Dockhand stack view
+6. Dockhand stack view with no sensitive data
 
 ---
 
@@ -55,9 +55,9 @@ docs/images/placeholders/
 
 ```text
 01-redroid-home.png
-02-playstore-login.png
+02-playstore-available.png
 03-chrome-installed.png
-04-google-pay-button.png
+04-chrome-public-page.png
 05-scrcpy-ui.png
 06-dockhand-stack.png
 ```
@@ -76,4 +76,4 @@ Example:
 
 ## Recommendation
 
-Start with placeholders, then replace with sanitized screenshots.
+Start with placeholders, then replace them with sanitized screenshots.
