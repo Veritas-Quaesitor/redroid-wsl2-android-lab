@@ -6,12 +6,12 @@
 - [Problem Statement](#-problem-statement)
 - [Final Working Solution](#-final-working-solution)
 - [Architecture Overview](#-architecture-overview)
-- [Key Requirements](#-key-requirements)
+- [Key Requirements](#key-requirements)
 - [What This Repo Contains](#-what-this-repo-contains)
 - [Supported Modes](#-supported-modes)
 - [Quick Start](#-quick-start)
 - [Security Notice](#-security-notice)
-- [Known Limitations](#-known-limitations)
+- [Known Limitations](#known-limitations)
 
 ---
 
